@@ -25,9 +25,32 @@ document.querySelector('#from').addEventListener('input', (e) => {
 // 2
 const messageBtnEl = document.querySelector('.messageBtn');
 const divMessageEl = document.querySelector('.message');
-console.log(messageBtnEl);
-messageBtnEl.addEventListener('click', function (e) {
+// console.log(messageBtnEl);
+messageBtnEl.addEventListener('click', () => {
    divMessageEl.classList.add('animate_animated', 'animate_fadeInLeftBig');
    divMessageEl.style.visibility = 'visible';
 });
 
+// 3
+const formEl = document.querySelector('form');
+const formInSel = formEl.querySelectorAll('.form-control');
+
+formEl.addEventListener('submit', (event) => {
+   formInSel.forEach(e => {
+      if (!e.value) {
+         e.classList.add('error');
+         e.style.backgroundColor = '#ccc';
+         event.preventDefault();
+      }
+   });
+});
+
+formEl.addEventListener('input', (event) => {
+   if (event.target.classList.contains('error')) {
+      if (event.target.value) {
+         event.target.classList.remove('error');
+         event.target.style.backgroundColor = null;
+      }
+      return;
+   }
+});
